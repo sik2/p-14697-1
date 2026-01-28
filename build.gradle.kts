@@ -41,7 +41,17 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    // JPA 의존성 제거
+    //  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    // R2DBC 의존성 추가
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    runtimeOnly("org.postgresql:r2dbc-postgresql")
+
+    // 테스트 의존성 변경
+    testImplementation("org.springframework.boot:spring-boot-starter-data-r2dbc-test")
+    testImplementation("org.testcontainers:testcontainers-r2dbc")
+    testImplementation("io.projectreactor:reactor-test")
+
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.ai:spring-ai-starter-model-ollama")
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
